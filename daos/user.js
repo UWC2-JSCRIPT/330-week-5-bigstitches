@@ -14,9 +14,9 @@ module.exports.getUser = async (inputEmail) => {
   
 }
 
-module.exports.getRoles = async (inputEmail) => {
+module.exports.getRoles = async (userId) => {
   try {
-    const foundUser = await User.findOne({ email: inputEmail }).lean();
+    const foundUser = await User.findOne({ _id: userId }).lean();
     // console.log(foundUser.email, ' ', foundUser.roles);
     return foundUser.roles;
   } catch (error) {

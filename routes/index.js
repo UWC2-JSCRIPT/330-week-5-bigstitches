@@ -8,6 +8,9 @@ router.use((req, res, next) => {
     next();
 });
 
+router.use("/items", require('./items'));
+// router.use("/items/:_id", require('./items'));
+router.use("/items/:id", require('./items'));
 router.use("/login", require('./login'));
 router.use("/login/signup", require('./login'));
 

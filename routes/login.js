@@ -58,11 +58,13 @@ router.post("/", requirePassword, async (req, res, next) => {
   // middleware check user exists
   req.email = req.body.email;
   req.existingUser = await userDAO.getUser(req.email);
-  req.roles = await userDAO.getRoles(req.email);
   // if (req.roles) {console.log('ROLES: ', req.roles)};
-  if (!req.existingUser||!req.roles||req.roles===[]) {
+  if (!req.existingUser) {
     res.status(401).send('Not a registered user');
-  } else next()        
+  } else {
+    req.roles = await userDAO.getRoles(req.existingUser._id);
+    next()  
+  }      
 }, async (req, res, _next) => {
   // endpoint bcrypt compare 
   bcrypt.compare(req.body.password, req.existingUser.password, async (err, result) => {
