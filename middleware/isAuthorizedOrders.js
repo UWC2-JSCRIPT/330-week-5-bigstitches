@@ -15,11 +15,9 @@ router.use("/", async (req, res, next) => {
   // console.log('ISAUTHORIZED', roles);
     if (!roles) {
       res.status(403).send('User has no roles');
-    } else if (roles.includes('admin')) {
+    } else {
       req.roles = roles;
       next();
-    } else {
-      res.status(403).send('User is not an admin');
     }
 });
 

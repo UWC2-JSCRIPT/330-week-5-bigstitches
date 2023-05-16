@@ -9,8 +9,11 @@ router.use((req, res, next) => {
 });
 
 router.use("/items", require('./items'));
-// router.use("/items/:_id", require('./items'));
 router.use("/items/:id", require('./items'));
+router.use("/orders", require('./order'));
+router.use("/orders/:id", require('./order'));
+//router.use("/orders", require('./order'));
+//router.use("/orders/:id", require('./order'));
 router.use("/login", require('./login'));
 router.use("/login/signup", require('./login'));
 

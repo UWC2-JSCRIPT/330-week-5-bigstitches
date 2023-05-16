@@ -9,15 +9,19 @@ const JWT_SECRET = 'JSoNToKen45OO!GoTeam';
 // 'Bearer 1234abcd') and you will need to extract just the token text. Any route that says 
 // "If the user is logged in" should use this middleware function.
 router.use("/", async (req, res, next) => {
+  // console.log('HERE');
   let token = req.headers.authorization;
     if (!token) {
+      // console.log('no token');
       res.status(401).send('Authoization not provided. Session not authenticated.');
     } else {
       token = token.split(' ')[1];
       try {
         req.userId  = jwt.verify(token, JWT_SECRET);
+        // console.log(req.userId);
         next();
       } catch (error) {
+        // console.log(error);
         res.status(401).send(`${error}, Token does not exist. Session not authenticated.`);
       }
     }
